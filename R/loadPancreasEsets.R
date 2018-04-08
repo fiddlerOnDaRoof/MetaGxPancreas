@@ -1,14 +1,13 @@
-#' Function to load ovarian cancer expression sets from the Experiment Hub
+#' Function to load pancreas cancer expression sets from the Experiment Hub
 #'
-#' This function returns ovarian cancer datasets from the hub and a vector of patients from the datasets that are most likely duplicates
+#' This function returns pancreas cancer datasets from the hub and a vector of patients from the datasets that are most likely duplicates
 #' @param removeDuplicates remove patients with a Spearman correlation greater than or equal to 0.98 with other patient expression profiles (default TRUE)
-#' @param quantileCutoff A nueric between 0 and 1 specifying to remove genes with standard deviation below the required quantile (default 0)
+#' @param quantileCutoff A numeric between 0 and 1 specifying to remove genes with standard deviation below the required quantile (default 0)
 #' @param rescale apply centering and scaling to the expression sets (default FALSE)
 #' @param minNumberGenes an integer specifying to remove expression sets with less genes than this number (default 0)
 #' @param minNumberEvents an integer specifying how man survival events must be in the dataset to keep the dataset (default 0)
 #' @param minSampleSize an integer specifying the minimum number of patients required in an eset (default 0)
-#' @param removeRetracted remove datasets from retracted papers (default TRUE, currently just PMID17290060 dataset)
-#' @param removeSubsets remove datasets that are a subset of other datasets (defeault TRUE, currently just PMID19318476)
+#' @param removeSeqSubsets currently only removes the ICGSSEQ dataset as it contains the same patients as the ICGS microarray dataset (defeault TRUE, currently just ICGSSEQ)
 #' @param keepCommonOnly remove probes not common to all datasets (default FALSE)
 #' @param imputeMissing remove patients from datasets with missing expression values
 #' @return a list with 2 elements. The First element named esets contains the datasets. The second element named duplicates contains
@@ -26,7 +25,7 @@
 
 
 loadOvarianEsets = function(removeDuplicates = TRUE, quantileCutoff = 0, rescale = FALSE, minNumberGenes = 0,
-                            minNumberEvents = 0, minSampleSize = 0, removeRetracted = TRUE, removeSubsets = TRUE,
+                            minNumberEvents = 0, minSampleSize = 0, removeSeqSubset = TRUE,
                             keepCommonOnly = FALSE, imputeMissing = FALSE)
 {
   duplicates = NULL
@@ -81,12 +80,12 @@ loadOvarianEsets = function(removeDuplicates = TRUE, quantileCutoff = 0, rescale
 
   hub = ExperimentHub::ExperimentHub()
   #AnnotationHub::possibleDates(hub)
-  ovarianData = query(hub, "MetaGxOvarian")
+  pancreasData = query(hub, "MetaGxPancreas")
   esets <- list()
-  for(i in seq_len(length(ovarianData)))
+  for(i in seq_len(length(pancreasnData)))
   {
-    esets[[i]] = ovarianData[[names(ovarianData)[i]]]
-    names(esets)[i] = ovarianData[i]$title
+    esets[[i]] = pancreasData[[names(pancreasData)[i]]]
+    names(esets)[i] = pancreasData[i]$title
   }
 
   ## -----------------------------------------------------------------------------
@@ -97,7 +96,7 @@ loadOvarianEsets = function(removeDuplicates = TRUE, quantileCutoff = 0, rescale
   ## same as used in metagx getbrcadata
   #load("inst\\extdata\\BenDuplicate.rda")
   #source(system.file("extdata", "patientselection.config", package="MetaGxOvarian"))
-  load(system.file("extdata", "duplicates.rda", package="MetaGxOvarian"))
+  load(system.file("extdata", "duplicates.rda", package="MetaGxPancreas"))
 
   rmix <- duplicates
   ii <- 1
@@ -142,14 +141,7 @@ loadOvarianEsets = function(removeDuplicates = TRUE, quantileCutoff = 0, rescale
       message(paste("excluding experiment hub dataset",ovarianData[i]$title,"(minNumberGenes)"))
       next
     }
-    if(removeRetracted && length(grep("retracted", Biobase::experimentData(eset)@other$warnings$warnings)) > 0){
-      message(paste("excluding experiment hub dataset",ovarianData[i]$title,"(removeRetracted)"))
-      next
-    }
-    if(removeSubsets && length(grep("subset", Biobase::experimentData(eset)@other$warnings$warnings)) > 0){
-      message(paste("excluding experiment hub dataset",ovarianData[i]$title,"(removeSubsets)"))
-      next
-    }
+
     message(paste("including experiment hub dataset",ovarianData[i]$title))
     ##    featureNames(eset) <- make.names(featureNames(eset))  ##should not do this, it is irreversible.
     esets[[i]] <- eset
