@@ -1,0 +1,68 @@
+## validate with `AnnotationHub::readMetadataFromCsv("TENxBrainData")`
+## (above pkg directory)
+
+infoString = c("BADEA", "BALAGURANATH" ,"CHEN", "COLLISON", "GRUTZMANN", "ICGCSEQ", "ICGCMICRO",
+               "KIRBY", "OUH", "PCSI", "PEI", "TCGA",
+               "UNC", "WINTER", "ZHANG")
+
+
+main.data <- data.frame(
+  Title = c("BADEA", "BALAGURANATH" ,"CHEN", "COLLISON", "GRUTZMANN", "ICGCSEQ", "ICGCMICRO",
+            "KIRBY", "OUH", "PCSI", "PEI", "TCGA",
+            "UNC", "WINTER", "ZHANG"
+            ),
+  Description = paste(
+    "Pancreas cancer  gene expression data ",
+    c(
+      "used in, Badea et al, Hepatogastroenterology 2008",
+      "used in Balagurunathan et al, Mol Cancer Ther 2008",
+      "used in, Chen et al, PLoS One 2015",
+      "used in, Collisson et al.,Nat Med 2011",
+      "used in, Grutzmann et al, Neoplasia, 2004",
+      "used in, Nones et al, Int. J. Cancer, 2014",
+      "used in, Bailey et al, Nature, 2016",
+      "used in, Kirby et al., Mol Oncol 2016",
+      "used in, Sandhu et al, Mol Onc, 2015",
+      "used in, Notta et al, Nature 2016 ",
+      "used in, Pei et al, Cancer Cell 2009",
+      "used in, TCGA Research Network, Cancer Cell 2017",
+      "used in, Moffitt et al, Nat Genet 2015",
+      "used in, Winter et al, PLoS Comput Biol, 2012",
+      "used in, Zhang et al, PLoS One 2012"
+      )
+  ),
+  RDataPath = c(
+    "MetaGxPancreas/BADEA.rda", "MetaGxPancreas/BALAGURANATH.rda", "MetaGxPancreas/CHEN.rda",
+    "MetaGxPancreas/COLLISON.rda", "MetaGxPancreas/GRUTZMANN.rda", "MetaGxPancreas/ICGCSEQ.rda",
+    "MetaGxPancreas/ICGCMICRO.rda", "MetaGxPancreas/KIRBY.rda", "MetaGxPancreas/OUH.rda",
+    "MetaGxPancreas/PCSI.rda", "MetaGxPancreas/PEI.rda", "MetaGxPancreas/TCGA.rda",
+    "MetaGxPancreas/UNC.rda", "MetaGxPancreas/WINTER.rda", "MetaGxPancreas/ZHANG.rda"
+  ),
+  BiocVersion="3.8",
+  Genome=c("Affymetrix Human Genome U133 Plus 2.0 Array", "Human 1A Microarray G4110A-G4110B", "Affymetrix,Rosetta-Merck RSTA Custom 2.0", "Affymetrix, array U133 Plus 2.0","Affymetrix GeneChip Human Genome HG-U133B",
+           "Illumina HumanHT-12 V4.0 expression beadchip","Illumina HiSeq 2000-2500","Illumina, RNA seqencing HiSeq","Agilent-028004 SurePrint G3 Human GE 8x60K Microarray","Illumina HiSeq 2000-2500","Affymetrix Human Genome U133 Plus 2.0 Array","IlluminaHiSeq_RNASeqV2","Agilent-014850 Whole Human Genome Microarray 4x44K G4112F Agilent-014850 Whole Human Genome Microarray 4x44K G4112F ",
+           "A-AFFY-44-Affymetrix GeneChip Human Genome U133 Plus 2.0 [HG-U133_Plus_2]","Affymetrix GeneChip Human Gene 1.0 ST arrays"
+           ),
+  SourceType="RData",
+  SourceUrl=c("https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=gse15471", "https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE11838",
+              "https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE57495", "https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE17891",
+              "https://www.ebi.ac.uk/arrayexpress/experiments/E-MEXP-950/?query=pilarsky&s_page=1&s_pagesize=50", "http://icgc.org/icgc/cgp/68/304/798",
+              "http://icgc.org/icgc/cgp/68/304/798", "https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE79670",
+              "https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE60980", "Private",
+              "https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=gse16515", "https://portal.gdc.cancer.gov/projects/TCGA-PAAD",
+              "https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE71729", "http://www.ebi.ac.uk/arrayexpress/experiments/E-MEXP-2780/",
+              "https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE28735"),
+  SourceVersion="April 08 2018",
+  Species="Homo sapien",
+  TaxonomyId=9606,
+  Coordinate_1_based=FALSE,
+  DataProvider=c(rep("GEO", 4), "Array Express", rep("ICGC", 2), rep("GEO", 2), "Private", "GEO", "GDC", "GEO", "Array Express", "GEO"),
+  Maintainer="Michael Zon <michaelzon7@gmail.com>",
+  RDataClass="ExpressionSet",
+  DispatchClass="Rda",
+  Tags = "breast cancer expression",
+  ResourceName = c(paste0(infoString, ".rda"))
+)
+
+write.csv(file="metadata.csv", main.data, row.names=FALSE)
+
