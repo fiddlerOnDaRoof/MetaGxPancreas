@@ -40,7 +40,7 @@ options(keep.source=TRUE, width = 50)
 The MetaGxPancreas package is a compendium of Pancreatic Cancer datasets.
 The package is publicly available and can be installed from Bioconductor into R version 3.5.0 or higher.
 Currently, the phenoData for the datasets is overall survival status and overall survival time.
-This information is available for 12 of the 16 datasets.
+This survival information is available for 11 of the 15 datasets.
 
 To install the MetaGxPancreas package from Bioconductor:
 <<install-pkg,eval=FALSE>>=
