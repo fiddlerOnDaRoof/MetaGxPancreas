@@ -38,7 +38,7 @@ main.data <- data.frame(
     "MetaGxPancreas/PCSI.rda", "MetaGxPancreas/PEI.rda", "MetaGxPancreas/TCGA.rda",
     "MetaGxPancreas/UNC.rda", "MetaGxPancreas/WINTER.rda", "MetaGxPancreas/ZHANG.rda"
   ),
-  BiocVersion="3.8",
+  BiocVersion="3.7",
   Genome=c("Affymetrix Human Genome U133 Plus 2.0 Array", "Human 1A Microarray G4110A-G4110B", "Affymetrix,Rosetta-Merck RSTA Custom 2.0", "Affymetrix, array U133 Plus 2.0","Affymetrix GeneChip Human Genome HG-U133B",
            "Illumina HumanHT-12 V4.0 expression beadchip","Illumina HiSeq 2000-2500","Illumina, RNA seqencing HiSeq","Agilent-028004 SurePrint G3 Human GE 8x60K Microarray","Illumina HiSeq 2000-2500","Affymetrix Human Genome U133 Plus 2.0 Array","IlluminaHiSeq_RNASeqV2","Agilent-014850 Whole Human Genome Microarray 4x44K G4112F Agilent-014850 Whole Human Genome Microarray 4x44K G4112F ",
            "A-AFFY-44-Affymetrix GeneChip Human Genome U133 Plus 2.0 [HG-U133_Plus_2]","Affymetrix GeneChip Human Gene 1.0 ST arrays"
