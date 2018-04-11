@@ -14,4 +14,3 @@ biocViews: Microarray, Software, GeneExpression, OneChannel, GeneSetEnrichment, 
 LazyData: yes
 Packaged: 2018-03-12 20:33:41 UTC; Michael Zon
 RoxygenNote: 6.0.1
-
