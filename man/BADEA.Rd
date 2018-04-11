@@ -21,5 +21,6 @@ Badea et al, Hepatogastroenterology 2008
 }
 \examples{
 BADEAEset = loadPancreasEsets()$esets$BADEA
+experimentData(BADEAEset) 
 }
 \keyword{datasets}
