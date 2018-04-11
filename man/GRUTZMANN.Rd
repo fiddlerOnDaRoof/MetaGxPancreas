@@ -20,6 +20,8 @@ https://www.ebi.ac.uk/arrayexpress/experiments/E-MEXP-950/?query=pilarsky&s_page
 Grutzmann et al, Neoplasia, 2004
 }
 \examples{
-GRUTZMANNset = loadPancreasEsets()$esets$GRUTZMANN
+GRUTZMANNEset = loadPancreasEsets()$esets$GRUTZMANN
+ experimentData(GRUTZMANNEset)
+
 }
 \keyword{datasets}
