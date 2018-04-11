@@ -21,5 +21,7 @@ Sandhu et al, Mol Onc, 2015
 }
 \examples{
 OUHEset = loadPancreasEsets()$esets$OUH
+experimentData(OUHEset)
+
 }
 \keyword{datasets}
