@@ -21,5 +21,7 @@ TCGA Research Network, Cancer Cell 2017
 }
 \examples{
 TCGAEset = loadPancreasEsets()$esets$TCGA
+experimentData(TCGAEset)
+
 }
 \keyword{datasets}
