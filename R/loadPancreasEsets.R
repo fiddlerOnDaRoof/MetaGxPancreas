@@ -82,13 +82,9 @@ loadPancreasEsets = function(removeDuplicates = TRUE, quantileCutoff = 0, rescal
   hub = ExperimentHub::ExperimentHub()
   #AnnotationHub::possibleDates(hub)
   pancreasData = query(hub, "MetaGxPancreas")
-  esets <- list()
-  for(i in seq_len(length(pancreasData)))
-  {
-    esets[[length(esets)+1]] = pancreasData[[names(pancreasData)[i]]]
-    names(esets)[length(esets)] = pancreasData[i]$title 
-  }
-
+  esets = lapply(pancreasData, function(x) x[[names(x)]])
+  names(esets) = pancreasData$title
+  
   if(removeSeqSubset == TRUE)
     esets$ICGCSEQ = NULL
   
@@ -130,12 +126,11 @@ loadPancreasEsets = function(removeDuplicates = TRUE, quantileCutoff = 0, rescal
         && sum(eset$vital_status == "deceased") < minNumberEvents
         || ncol(eset) < minSampleSize)
     {
-      message(paste("excluding",
-                    "(minNumberEvents or minSampleSize)"))
+      message("excluding","(minNumberEvents or minSampleSize)")
       next
     }
     if(nrow(eset) < minNumberGenes) {
-      message(paste("excluding experiment hub dataset",pancreasData[i]$title,"(minNumberGenes)"))
+      message("excluding experiment hub dataset ",pancreasData[i]$title," (minNumberGenes)")
       next
     }
 
@@ -155,7 +150,7 @@ loadPancreasEsets = function(removeDuplicates = TRUE, quantileCutoff = 0, rescal
       
     }
     
-    message(paste("including experiment hub dataset",pancreasData[i]$title))
+    message("including experiment hub dataset ",pancreasData[i]$title)
     ##    featureNames(eset) <- make.names(featureNames(eset))  ##should not do this, it is irreversible.
     esets[[i]] <- eset
     rm(eset)
@@ -173,8 +168,7 @@ loadPancreasEsets = function(removeDuplicates = TRUE, quantileCutoff = 0, rescal
 
   ids.with.missing.data <- which(vapply(esets, function(X)
     sum(!complete.cases(Biobase::exprs(X))) > 0, numeric(1)) == 1)
-  message(paste("Ids with missing data:", paste(names(ids.with.missing.data),
-                                                collapse=", ")))
+  message("Ids with missing data: ", names(ids.with.missing.data))
 
   if (length(ids.with.missing.data) > 0 && imputeMissing) {
     for (i in ids.with.missing.data) {
