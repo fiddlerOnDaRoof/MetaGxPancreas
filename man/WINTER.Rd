@@ -21,5 +21,7 @@ Winter et al, PLoS Comput Biol, 2012
 }
 \examples{
 WINTEREset = loadPancreasEsets()$esets$WINTER
+experimentData(WINTEREset)
+
 }
 \keyword{datasets}
