@@ -21,5 +21,7 @@ Nones et al, Int. J. Cancer, 2014
 }
 \examples{
 ICGCMICROEset = loadPancreasEsets()$esets$ICGCMICRO
+  experimentData(ICGCMICROEset)
+
 }
 \keyword{datasets}
