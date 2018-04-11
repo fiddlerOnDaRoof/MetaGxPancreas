@@ -21,5 +21,7 @@ Bailey et al, Nature, 2016
 }
 \examples{
 ICGCSEQEset = loadPancreasEsets()$esets$ICGCSEQ
+experimentData(ICGCSEQEset)
+
 }
 \keyword{datasets}
