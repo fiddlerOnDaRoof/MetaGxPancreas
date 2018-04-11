@@ -1,5 +1,5 @@
-\name{BALAGURUNATHAN}
-\alias{BALAGURUNATHAN}
+\name{BALAGURANATH}
+\alias{BALAGURANATH}
 \docType{data}
 \title{
  BALAGURUNATHAN Study Pancreatic Cancer Dataset
@@ -20,7 +20,7 @@ https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE11838
 Balagurunathan et al, Mol Cancer Ther 2008
 }
 \examples{
-BALAGURUNATHEset = loadPancreasEsets()$esets$BALAGURUNATH
- experimentData(BALAGURUNATHEset)
+BALAGURANATHEset = loadPancreasEsets()$esets$BALAGURANATH
+ experimentData(BALAGURANATHEset)
 }
 \keyword{datasets}
