@@ -21,5 +21,7 @@ Collisson et al.,Nat Med 2011
 }
 \examples{
 COLLISONEset = loadPancreasEsets()$esets$COLLISON
+experimentData(COLLISONEset)
+
 }
 \keyword{datasets}
