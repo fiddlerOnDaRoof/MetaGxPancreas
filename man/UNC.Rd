@@ -21,5 +21,7 @@ Moffitt et al, Nat Genet 2015
 }
 \examples{
 UNCEset = loadPancreasEsets()$esets$UNC
+ experimentData(UNCEset)
+
 }
 \keyword{datasets}
