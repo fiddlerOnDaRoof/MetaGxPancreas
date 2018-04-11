@@ -85,11 +85,8 @@ loadPancreasEsets = function(removeDuplicates = TRUE, quantileCutoff = 0, rescal
   esets <- list()
   for(i in seq_len(length(pancreasData)))
   {
-    if(i != 4 & i != 7){
-      esets[[length(esets)+1]] = pancreasData[[names(pancreasData)[i]]]
-      names(esets)[length(esets)] = pancreasData[i]$title 
-    }
-
+    esets[[length(esets)+1]] = pancreasData[[names(pancreasData)[i]]]
+    names(esets)[length(esets)] = pancreasData[i]$title 
   }
 
   if(removeSeqSubset == TRUE)
