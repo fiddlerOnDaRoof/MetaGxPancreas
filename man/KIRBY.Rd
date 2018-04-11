@@ -21,5 +21,7 @@ Kirby et al., Mol Oncol 2016
 }
 \examples{
 KIRBYEset = loadPancreasEsets()$esets$KIRBY
+experimentData(KIRBYEset)
+
 }
 \keyword{datasets}
