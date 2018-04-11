@@ -20,6 +20,8 @@ https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE57495
 Chen et al, PLoS One 2015
 }
 \examples{
-CHENset = loadPancreasEsets()$esets$CHEN
+CHENEset = loadPancreasEsets()$esets$CHEN
+  experimentData(CHENEset)
+
 }
 \keyword{datasets}
