@@ -7,7 +7,7 @@
 #' @param minNumberGenes an integer specifying to remove expression sets with less genes than this number (default 0)
 #' @param minNumberEvents an integer specifying how man survival events must be in the dataset to keep the dataset (default 0)
 #' @param minSampleSize an integer specifying the minimum number of patients required in an eset (default 0)
-#' @param removeSeqSubsets currently only removes the ICGSSEQ dataset as it contains the same patients as the ICGS microarray dataset (defeault TRUE, currently just ICGSSEQ)
+#' @param removeSeqSubset currently only removes the ICGSSEQ dataset as it contains the same patients as the ICGS microarray dataset (defeault TRUE, currently just ICGSSEQ)
 #' @param keepCommonOnly remove probes not common to all datasets (default FALSE)
 #' @param imputeMissing remove patients from datasets with missing expression values
 #' @return a list with 2 elements. The First element named esets contains the datasets. The second element named duplicates contains
@@ -16,15 +16,16 @@
 #' @importFrom Biobase esApply featureNames sampleNames exprs pData experimentData
 #' @importFrom lattice levelplot
 #' @importFrom impute impute.knn
+#' @importFrom Biobase ExpressionSet
 #' @importFrom ExperimentHub ExperimentHub
 #' @importFrom AnnotationHub query
 #' @importFrom stats complete.cases sd quantile
 #' @examples
 #'
-#' esetsAndDups = loadOvarianEsets()
+#' esetsAndDups = loadPancreasEsets()
 
 
-loadOvarianEsets = function(removeDuplicates = TRUE, quantileCutoff = 0, rescale = FALSE, minNumberGenes = 0,
+loadPancreasEsets = function(removeDuplicates = TRUE, quantileCutoff = 0, rescale = FALSE, minNumberGenes = 0,
                             minNumberEvents = 0, minSampleSize = 0, removeSeqSubset = TRUE,
                             keepCommonOnly = FALSE, imputeMissing = FALSE)
 {
@@ -82,12 +83,18 @@ loadOvarianEsets = function(removeDuplicates = TRUE, quantileCutoff = 0, rescale
   #AnnotationHub::possibleDates(hub)
   pancreasData = query(hub, "MetaGxPancreas")
   esets <- list()
-  for(i in seq_len(length(pancreasnData)))
+  for(i in seq_len(length(pancreasData)))
   {
-    esets[[i]] = pancreasData[[names(pancreasData)[i]]]
-    names(esets)[i] = pancreasData[i]$title
+    if(i != 4 & i != 7){
+      esets[[length(esets)+1]] = pancreasData[[names(pancreasData)[i]]]
+      names(esets)[length(esets)] = pancreasData[i]$title 
+    }
+
   }
 
+  if(removeSeqSubset == TRUE)
+    esets$ICGCSEQ = NULL
+  
   ## -----------------------------------------------------------------------------
   ##Explicit removal of samples from specified datasets:
   ## -----------------------------------------------------------------------------
@@ -96,7 +103,7 @@ loadOvarianEsets = function(removeDuplicates = TRUE, quantileCutoff = 0, rescale
   ## same as used in metagx getbrcadata
   #load("inst\\extdata\\BenDuplicate.rda")
   #source(system.file("extdata", "patientselection.config", package="MetaGxOvarian"))
-  load(system.file("extdata", "duplicates.rda", package="MetaGxPancreas"))
+  load(system.file("extdata", "duplicates.Rda", package="MetaGxPancreas"))
 
   rmix <- duplicates
   ii <- 1
@@ -119,13 +126,6 @@ loadOvarianEsets = function(removeDuplicates = TRUE, quantileCutoff = 0, rescale
       Biobase::exprs(eset) <- t(scale(t(Biobase::exprs(eset))))
     }
 
-    if(removeDuplicates == TRUE){
-      keepix <- setdiff(Biobase::sampleNames(eset), rmix)
-      Biobase::exprs(eset) <- Biobase::exprs(eset)[, keepix, drop=FALSE]
-      Biobase::pData(eset) <- Biobase::pData(eset)[keepix, , drop=FALSE]
-
-    }
-
     ##include study if it has enough samples and events:
     if (!is.na(minNumberEvents)
         && exists("minSampleSize") && !is.na(minSampleSize)
@@ -138,11 +138,27 @@ loadOvarianEsets = function(removeDuplicates = TRUE, quantileCutoff = 0, rescale
       next
     }
     if(nrow(eset) < minNumberGenes) {
-      message(paste("excluding experiment hub dataset",ovarianData[i]$title,"(minNumberGenes)"))
+      message(paste("excluding experiment hub dataset",pancreasData[i]$title,"(minNumberGenes)"))
       next
     }
 
-    message(paste("including experiment hub dataset",ovarianData[i]$title))
+    if(removeDuplicates == TRUE){
+      keepix <- setdiff(colnames(eset@assayData$exprs), rmix)
+      if(length(keepix) != length(colnames(eset@assayData$exprs)))
+      {
+        newEset = ExpressionSet(Biobase::exprs(eset)[, keepix, drop=FALSE])
+        newEset@experimentData = eset@experimentData
+        newEset@phenoData = eset@phenoData
+        newEset@phenoData@data = Biobase::pData(eset)[keepix, , drop=FALSE]
+        newEset@featureData = eset@featureData
+        eset = newEset
+      }
+      #Biobase::exprs(eset) <- Biobase::exprs(eset)[, keepix, drop=FALSE]
+      #Biobase::pData(eset) <- Biobase::pData(eset)[keepix, , drop=FALSE]
+      
+    }
+    
+    message(paste("including experiment hub dataset",pancreasData[i]$title))
     ##    featureNames(eset) <- make.names(featureNames(eset))  ##should not do this, it is irreversible.
     esets[[i]] <- eset
     rm(eset)
