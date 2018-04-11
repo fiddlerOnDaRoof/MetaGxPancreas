@@ -20,7 +20,7 @@ https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE11838
 Balagurunathan et al, Mol Cancer Ther 2008
 }
 \examples{
-BALAGURUNATHANset = loadPancreasEsets()$esets$BALAGURUNATHAN
- experimentData(BALAGURUNATHANset)
+BALAGURUNATHEset = loadPancreasEsets()$esets$BALAGURUNATH
+ experimentData(BALAGURUNATHEset)
 }
 \keyword{datasets}
