@@ -21,5 +21,7 @@ Notta et al, Nature 2016
 }
 \examples{
 PCSIEset = loadPancreasEsets()$esets$PCSI
+ experimentData(PCSIEset)
+
 }
 \keyword{datasets}
