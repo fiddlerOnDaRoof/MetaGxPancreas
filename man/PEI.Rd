@@ -21,5 +21,7 @@ Pei et al, Cancer Cell 2009
 }
 \examples{
 PEIEset = loadPancreasEsets()$esets$PEI
+  experimentData(PEIEset)
+
 }
 \keyword{datasets}
