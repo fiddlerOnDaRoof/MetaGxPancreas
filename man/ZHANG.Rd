@@ -21,5 +21,7 @@ Zhang et al, PLoS One 2012
 }
 \examples{
 ZHANGEset = loadPancreasEsets()$esets$ZHANG
+experimentData(ZHANGEset)
+
 }
 \keyword{datasets}
