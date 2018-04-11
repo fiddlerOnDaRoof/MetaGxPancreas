@@ -21,5 +21,6 @@ Balagurunathan et al, Mol Cancer Ther 2008
 }
 \examples{
 BALAGURUNATHANset = loadPancreasEsets()$esets$BALAGURUNATHAN
+ experimentData(BALAGURUNATHANset)
 }
 \keyword{datasets}
