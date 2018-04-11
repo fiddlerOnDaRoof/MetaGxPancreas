@@ -20,7 +20,7 @@ http://icgc.org/icgc/cgp/68/304/798
 Bailey et al, Nature, 2016
 }
 \examples{
-ICGCSEQEset = loadPancreasEsets()$esets$ICGCSEQ
+ICGCSEQEset = loadPancreasEsets(removeSeqSubset = FALSE)$esets$ICGCSEQ
 experimentData(ICGCSEQEset)
 
 }
