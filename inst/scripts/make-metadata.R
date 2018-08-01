@@ -43,8 +43,8 @@ main.data <- data.frame(
     "MetaGxPancreas/ICGCMICRO.rda", "MetaGxPancreas/KIRBY.rda", "MetaGxPancreas/OUH.rda",
     "MetaGxPancreas/PCSI.rda", "MetaGxPancreas/PEI.rda", "MetaGxPancreas/TCGA.rda",
     "MetaGxPancreas/UNC.rda", "MetaGxPancreas/WINTER.rda", "MetaGxPancreas/ZHANG.rda",
-    "MetaGxPancreas/HAMIDI","MetaGxPancreas/YANG", "MetaGxPancreas/LUNARDI", 
-    "MetaGxPancreas/JANKY", "MetaGxPancreas/BAUER", "MetaGxPancreas/HAIDER"
+    "MetaGxPancreas/HAMIDI.rda","MetaGxPancreas/YANG.rda", "MetaGxPancreas/LUNARDI.rda", 
+    "MetaGxPancreas/JANKY.rda", "MetaGxPancreas/BAUER.rda", "MetaGxPancreas/HAIDER.rda"
   ),
   BiocVersion="3.7",
   Genome=c("Affymetrix Human Genome U133 Plus 2.0 Array", "Human 1A Microarray G4110A-G4110B", "Affymetrix,Rosetta-Merck RSTA Custom 2.0", "Affymetrix, array U133 Plus 2.0","Affymetrix GeneChip Human Genome HG-U133B",
