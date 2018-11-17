@@ -81,7 +81,7 @@ loadPancreasEsets = function(removeDuplicates = TRUE, quantileCutoff = 0, rescal
 
   hub = ExperimentHub::ExperimentHub()
   #AnnotationHub::possibleDates(hub)
-  pancreasData = query(hub, "MetaGxPancreas")
+  pancreasData = query(hub, c("MetaGxPancreas", "ExpressionSet"))
   esets = lapply(pancreasData, function(x) x[[names(x)]])
   names(esets) = pancreasData$title
   
